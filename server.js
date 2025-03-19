@@ -8,6 +8,15 @@ require('dotenv').config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+const corsOptions = {
+    origin: 'http://localhost:3000', // Allow only this origin
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allowed HTTP methods
+    credentials: true, // Allow cookies and credentials
+    optionsSuccessStatus: 204, // Respond with 204 No Content for preflight requests
+  };
+  
+  app.use(cors(corsOptions)); // Use CORS with the specified options
+  app.use(express.json());
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
